@@ -95,6 +95,7 @@ persona-luoxiang/
 ├── skill.yaml                   # 权威元数据（Skill ID / 触发词 / 来源 / 边界）
 ├── README.md                    # 本文件
 ├── LICENSE                      # MIT（仅覆盖本仓库原创内容，见第八、九节）
+├── NOTICE.md                    # 上游衍生与素材版权归属声明
 ├── THIRD_PARTY_NOTICES.md       # 上游项目（Distilly / nuwa-skill）许可证与署名声明
 ├── persona.md                   # Distilly 人格层（Layer 0-7 + Agentic Protocol）
 ├── work.md                      # Distilly 能力层（法律分析工作法、教学与表达方法）
@@ -190,7 +191,7 @@ python "$s/scripts/install_to_dsh.py" --force
 
 ## 九、许可
 
-- 本仓库的原创内容（结构、脚本、调研笔记与 Skill 正文）以 **MIT License** 发布（见 `LICENSE`）；
+- 本仓库的原创内容（结构、脚本、调研笔记与 Skill 正文）以 **MIT License** 发布（见 `LICENSE` 与 `NOTICE.md`）；
   其中衍生自 Distilly 与 nuwa-skill 的机制与结构部分同时受两个上游 MIT 许可证约束，
   许可证要求已按原文保留（见 `THIRD_PARTY_NOTICES.md`）。
 - 上述 MIT 许可**不覆盖**罗翔本人的言论、姓名与形象权益，也不构成对其视频的再授权；
