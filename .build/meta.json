@@ -1,0 +1,81 @@
+{
+  "schema_version": "3",
+  "id": "persona_luoxiang",
+  "name": "LuoXiang",
+  "display_name": "LuoXiang",
+  "slug": "luoxiang",
+  "character": "celebrity",
+  "research_profile": "budget-friendly",
+  "kind": "meta-skill",
+  "version": "1.0.0",
+  "language": "zh-CN",
+  "summary": "罗翔（中国政法大学刑法学教授、B站「罗翔说刑法」）的思维框架与表达方式，面向「与罗翔进行面对面对话」的思维顾问场景。",
+  "profile": {
+    "identity": "中国政法大学刑法学教授、法律普及者",
+    "occupation": "法学教师 / 刑法学者 / 公共普法内容创作者",
+    "known_for": "把刑法讲成具体处境中的判断问题；以有限性、程序与合乎中道为核心的法律思维；对人性幽暗面与自身傲慢的持续自省",
+    "specialty": "刑法学、法哲学、经典讲读（柏拉图短篇与《理想国》）"
+  },
+  "classification": {
+    "language": "zh-CN",
+    "gallery_category": "celebrity",
+    "tags": [
+      "罗翔",
+      "法律思维",
+      "刑法",
+      "法治",
+      "有限性",
+      "合乎中道",
+      "悖论",
+      "自省",
+      "苏格拉底",
+      "柏拉图",
+      "普法",
+      "思维顾问",
+      "人物蒸馏"
+    ]
+  },
+  "tags": [
+    "罗翔",
+    "法律思维",
+    "有限性",
+    "合乎中道",
+    "自省",
+    "普法"
+  ],
+  "knowledge_sources": [
+    "本地 B 站字幕物料：罗翔相关物料/部分基于Raw的初步整理后的内容/20260822_罗翔_相关访谈（14 份访谈整理稿）",
+    "本地 B 站字幕物料：罗翔相关物料/部分基于Raw的初步整理后的内容/20260822_罗翔_读评论（12 份读评论整理稿）",
+    "本地 B 站字幕物料：罗翔相关物料/部分基于Raw的初步整理后的内容/20260628_罗翔_经典颂读（理想国 8 篇、柏拉图短篇 8 篇、AI 主题 4 篇、文学读后感 2 篇）",
+    "本地 B 站字幕物料：罗翔相关物料/Raw/评论（读评论系列原始字幕，含 6 期无整理稿的期数）",
+    "本地 B 站字幕物料：罗翔相关物料/Raw/20260805_罗翔_相关访谈、Raw/20260628_罗翔_经典颂读（原始字幕，用于交叉校验）",
+    "用户本地二手分析：罗翔相关物料/部分基于Raw的初步整理后的内容/20260805_罗翔性格分析（第一版、第二版）",
+    "references/research/01-writings-plato-literature.md",
+    "references/research/01-writings-republic-ai.md",
+    "references/research/02-conversations-a.md",
+    "references/research/02-conversations-b.md",
+    "references/research/02-conversations-c.md",
+    "references/research/02-conversations-d.md",
+    "references/research/03-expression-dna-a.md",
+    "references/research/03-expression-dna-b.md",
+    "references/research/04-external-views.md",
+    "references/research/05-decisions.md",
+    "references/research/06-timeline.md"
+  ],
+  "artifacts": {
+    "combined_name": "persona-luoxiang",
+    "work_name": "persona-luoxiang-work",
+    "persona_name": "persona-luoxiang-persona"
+  },
+  "lifecycle": {
+    "status": "active",
+    "version": "1.0.0"
+  },
+  "generation": {
+    "engine": "distilly+huashu-nuwa",
+    "character": "celebrity",
+    "research_profile": "budget-friendly",
+    "collection_strategy": "local-first",
+    "source_material": "本地 B 站罗翔视频字幕物料（132 份 markdown，约 2.2 MB）"
+  }
+}
