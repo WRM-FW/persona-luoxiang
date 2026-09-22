@@ -7,14 +7,14 @@
 | Skill ID | `persona_luoxiang` |
 | Skill 名称 | `LuoXiang` |
 | 版本 | `1.0.0` |
-| 加载命令名（DSH） | `persona-luoxiang` |
+| 目录 / 调用名 | `persona-luoxiang` |
 | 入口文件 | `SKILL.md` |
 | 语言 | 简体中文 |
 | 调研截止 | 2026-09-15 |
 
 ## 一、这个 Skill 是什么
 
-一个可被 DSH Agent 工作区直接加载的独立人物 Skill。加载后，Agent 进入「与罗翔面对面对话」的状态：用第一人称、按他的语气说话，用他的心智模型分析用户的问题，而不是背法条或复述字幕。
+一个可被 AI Agent 直接加载的独立人物 Skill。加载后，Agent 进入「与罗翔面对面对话」的状态：用第一人称、按他的语气说话，用他的心智模型分析用户的问题，而不是背法条或复述字幕。
 
 它蒸馏的是 **HOW he thinks**，不是 **WHAT he said**：
 
@@ -29,56 +29,41 @@ Skill 被刻意设计成**不要求每次走同一条路径**：故事—设问�
 
 ## 二、来源
 
-从用户提供的本地 B 站罗翔视频字幕物料蒸馏而来，**本地语料优先**，未使用知乎、微信公众号、百度百科或内容农场。
+素材来自 [罗翔老师 B 站主页](https://space.bilibili.com/517327498) 的公开视频字幕物料
+（访谈、读评论、经典讲读等 132 份整理稿），本地语料优先，未使用知乎、微信公众号、
+百度百科或内容农场。调研方法与生成管线见第八节。
 
-- 素材路径：`../罗翔相关物料/`（132 份 markdown，约 2.2 MB）
-- 纳入范围：访谈 14 场（含鲁豫长访谈、《十三邀》许知远、与刘擎、与余华、与罗永浩等）、读评论 19 期（12 期整理稿 + 7 期仅存原始字幕，用于补齐编号缺口）、经典讲读 22 篇（《理想国》8 篇、柏拉图短篇 8 篇、AI 主题 4 篇、文学读后感 2 篇）、本地二手分析《罗翔性格分析》两版
-- 排除范围：`Raw/古代刑法`（网络同人小说）与 `Raw/直播回放`（游戏抽卡录像）两个目录与罗翔无关，属于物料目录里的噪声，已在调研阶段剔除
-- 调研方式：女娲（NuWa）六维度调研方法论 + 11 个并行调研 Agent，产出 `references/research/` 下 11 份笔记（01 著作与讲读 / 02 长对话 ×4 / 03 表达 DNA ×2 / 04 他者视角 / 05 决策记录 / 06 时间线）
-- 生成管线：Distilly（`celebrity` 人物族、`local-first` 采集、`budget-friendly` 调研档）产出 `persona.md`、`work.md`、`manifest.json`、`meta.json`
+## 三、安装
 
-## 三、怎么加载
+### 方法一：手动安装
 
-DSH 只扫描技能根目录下的**一层**目录包 `<root>/<name>/SKILL.md`，默认根包括 `<项目根>/.dsh/skills` 与 `<项目根>/.agents/skills`。本 Skill 已安装到工作区技能根：
+下载 [Releases](https://github.com/WRM-FW/persona-luoxiang/releases) 中的发行版并解压，
+将 `persona-luoxiang` 文件夹放入对应 Agent 的 Skill 目录即可。
 
-```
-人物蒸馏/.agents/skills/persona-luoxiang/SKILL.md
-```
+不同 Agent 的 Skill 目录位置可能不同，请以对应 Agent 的官方文档或实际目录结构为准。
 
-DSH 会以 Chokidar 监视技能根，**新增 Skill 无需重启**，下一个模型步骤即可在会话技能清单里看到它。
+### 方法二：让 Agent 自动安装
 
-要在别处使用，把整个 `persona-luoxiang/` 目录复制到任意一个技能根即可：
+下载发行版后，直接将下面的提示词发送给 Agent，让 Agent 自己完成安装：
 
-| 作用范围 | 目标路径 |
-| --- | --- |
-| 单个项目（DSH 优先） | `<项目根>/.dsh/skills/persona-luoxiang/` |
-| 单个项目（agents 兼容） | `<项目根>/.agents/skills/persona-luoxiang/` |
-| 当前用户全局 | `~/.dsh/skills/persona-luoxiang/` 或 `~/.agents/skills/persona-luoxiang/` |
+```text
+请帮我安装这个 Skill。
+Skill 名称：persona_luoxiang
+Skill 文件位置：“填入本地位置”
 
-不要把它放到更深一层（例如 `skills/人物/persona-luoxiang/`），DSH 不递归发现嵌套的 `SKILL.md`。
-
-### 命名说明（重要）
-
-`SKILL.md` 的 frontmatter 里 `name` 必须是 kebab-case，DSH 的校验规则是 `^[a-z0-9]+(?:-[a-z0-9]+)*$`，**下划线会被判为非法名称并静默丢弃整个 Skill**。所以：
-
-- 目录名与 frontmatter `name` 用 `persona-luoxiang`（DSH 加载命令名）
-- 逻辑 Skill ID 仍是 `persona_luoxiang`，记录在 `skill.yaml`、`SKILL.md` 的 `metadata.skill_id` 与 `manifest.json` 中
-
-### 验证是否被加载
-
-```powershell
-# 1) 文件就位
-Test-Path .agents\skills\persona-luoxiang\SKILL.md
-
-# 2) frontmatter 合法（name 与 description 必填，name 必须 kebab-case）
-Get-Content .agents\skills\persona-luoxiang\SKILL.md -TotalCount 3
-
-# 3) DSH 侧：新开一轮对话，技能清单里应出现 persona-luoxiang
+请将它安装到当前 Agent 正确的 Skill 目录中，并完成安装后的检查。
+安装完成后告诉我 Skill 的实际安装位置，以及如何调用它。
 ```
 
 ## 四、怎么用
 
-直接说自然语言即可，不要求固定格式：
+安装完成后，也可以直接让 Agent 调用：
+
+```text
+调用 persona_luoxiang Skill。
+```
+
+或直接说自然语言，不要求固定格式：
 
 - 「用罗翔的视角看看这件事」
 - 「如果是罗翔，他会怎么分析我该不该跟领导顶嘴」
@@ -91,7 +76,7 @@ Get-Content .agents\skills\persona-luoxiang\SKILL.md -TotalCount 3
 
 ```
 persona-luoxiang/
-├── SKILL.md                     # DSH 加载入口（自包含，含全部核心内容）
+├── SKILL.md                     # 加载入口（自包含，含全部核心内容）
 ├── skill.yaml                   # 权威元数据（Skill ID / 触发词 / 来源 / 边界）
 ├── README.md                    # 本文件
 ├── LICENSE                      # MIT（仅覆盖本仓库原创内容，见第八、九节）
@@ -128,30 +113,6 @@ persona-luoxiang/
 | 边界与反模式测试 | 独立评审 Agent | Status PASS，A 组 1.75 / B 组 1.75，盲测辨识度 中，结构 13 项全覆盖 |
 
 两份验证报告在 `knowledge/research/reviews/`：`validation.md`（已知答案测试）、`research_audit.md`（边界、反模式、盲测、结构）。报告里提出的问题已回灌进 `SKILL.md`：补上死刑立场这一条自我修正记录、给「不给鼓励性承诺」补判据、把即兴应答四段骨架与收束句式写进表达DNA、增加「不制造金句 / 自谦不做默认开场收尾 / 中道只用于价值问题 / 不评价真实在世人物」等输出纪律。
-
-### 复现命令
-
-```powershell
-$s = "罗翔/persona-luoxiang"
-
-# 1) 规范调研笔记的列表格式，再汇总（merge 只统计 `- ` 无序列表）
-python "$s/scripts/normalize_research_bullets.py" "$s/references/research"
-Copy-Item "$s/references/research/*.md" "$s/knowledge/research/raw/" -Force
-python .agents/skills/distilly/tools/research/merge_research.py "$s"
-
-# 2) 用 Distilly 重新生成 persona / work 层产物
-python .agents/skills/distilly/tools/skill_writer.py --action create `
-  --character celebrity --slug luoxiang --name "LuoXiang" `
-  --meta "$s/.build/meta.json" --work "$s/work.md" --persona "$s/persona.md" `
-  --base-dir "$s/.build" --no-install-claude-skill
-
-# 3) 把引擎元数据对齐到本 Skill 的规范身份（id / name / version / 命令名）
-python "$s/scripts/finalize_distilly_artifacts.py" "$s"
-
-# 4) 校验并安装
-node "$s/scripts/validate_skill_yaml.mjs" "$s"
-python "$s/scripts/install_to_dsh.py" --force
-```
 
 ## 七、边界与免责
 
