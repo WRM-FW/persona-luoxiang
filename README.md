@@ -49,7 +49,7 @@ Skill 被刻意设计成**不要求每次走同一条路径**：故事—设问�
 ```text
 请帮我安装这个 Skill。
 Skill 名称：persona_luoxiang
-Skill 文件位置：“填入本地位置”
+Skill 文件位置：“填入文件地址”
 
 请将它安装到当前 Agent 正确的 Skill 目录中，并完成安装后的检查。
 安装完成后告诉我 Skill 的实际安装位置，以及如何调用它。
